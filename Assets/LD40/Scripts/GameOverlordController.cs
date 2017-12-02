@@ -22,6 +22,10 @@ public class GameOverlordController : MonoBehaviour
     public Text requiredCounterText;
     public Button kittyPartyButton;
 
+    private float partyRemainingTime;
+    public Text clockText;
+    public Image clockImage;
+
     public GameObject panelAdoptCat;
 
     private void Awake()
@@ -46,7 +50,19 @@ public class GameOverlordController : MonoBehaviour
     void Update()
     {
         if (!panelAdoptCat.activeSelf && nextCatTime <= Time.time)
+        {
             panelAdoptCat.SetActive(true);
+        }
+            
+        if (partyRemainingTime > 0)
+        {
+            partyRemainingTime -= Time.deltaTime;
+            clockText.text = Mathf.FloorToInt(partyRemainingTime).ToString();
+        } else
+        {
+            clockText.gameObject.SetActive(false);
+            clockImage.gameObject.SetActive(false);
+        }
 
     }
 
@@ -106,5 +122,11 @@ public class GameOverlordController : MonoBehaviour
         prevCatsRequiredForParty = temp;
         requiredCounterText.text = catsRequiredForParty.ToString();
         kittyPartyButton.gameObject.SetActive(false);
+        clockImage.gameObject.SetActive(true);
+
+        partyRemainingTime = 30;
+        clockText.text = Mathf.FloorToInt(partyRemainingTime).ToString();
+        clockText.gameObject.SetActive(true);
+        clockImage.gameObject.SetActive(true);
     }
 }
