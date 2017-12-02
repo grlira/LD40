@@ -10,6 +10,8 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D myRigidBody;
     private Transform myTransform;
 
+    public Sprite[] playerSprites;
+
     // Use this for initialization
     void Start()
     {
@@ -23,6 +25,11 @@ public class PlayerController : MonoBehaviour
 
     }
 
+    private void SetSprite(int side)
+    {
+        this.GetComponent<SpriteRenderer>().sprite = playerSprites[side];
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -31,16 +38,17 @@ public class PlayerController : MonoBehaviour
         if (playerToMouse != null)
         {
             Vector2 playerToMouseNotNull = (Vector2)playerToMouse;
-            setPlayerOrientation((Vector2) playerToMouse);
+            float angle = getPlayerAngle(playerToMouseNotNull);
+            setPlayerSprite(angle);
 
             Vector2 movementDirection = Vector2.zero;
             var characterController = GetComponent<TDCharacterController2D>();
 
+        
             if (Input.GetKey(KeyCode.W))
             {
                 movementDirection = playerToMouseNotNull;
             }
-
             if (Input.GetKey(KeyCode.S))
             {
                 movementDirection = -playerToMouseNotNull;
@@ -88,10 +96,14 @@ public class PlayerController : MonoBehaviour
         return (mousePosition2D - new Vector2(myTransform.position.x, myTransform.position.y)).normalized;
     }
 
-    void setPlayerOrientation(Vector2 playerToMouse)
+    float getPlayerAngle(Vector2 playerToMouse)
     {
-        float playerOrientation = Mathf.Atan2(playerToMouse.y, playerToMouse.x);
-        this.transform.rotation = Quaternion.AngleAxis(playerOrientation * Mathf.Rad2Deg, Vector3.forward);
+        return Mathf.Atan2(playerToMouse.y, playerToMouse.x) * Mathf.Rad2Deg;
     }
 
+    void setPlayerSprite(float angle)
+    {
+        int index = Mathf.FloorToInt((angle + 22.5f + 180f)/45f) % 8;
+        SetSprite(index);
+    }
 }
