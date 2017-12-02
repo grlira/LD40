@@ -13,6 +13,11 @@ public class CatController : MonoBehaviour
 
     private Rigidbody2D myRigidBody;
 
+    public GameObject poopPrefab;
+
+
+    private float nextPoop;
+
     // Use this for initialization
     void Start()
     {
@@ -49,5 +54,19 @@ public class CatController : MonoBehaviour
         }
 
         myRigidBody.velocity += movementVector * speed;
+
+        CheckPooping();
+    }
+
+    private void CheckPooping()
+    {
+        if (Time.time < nextPoop)
+            return;
+
+        // Spawn poop prefab
+        Instantiate(poopPrefab, this.transform.position, Quaternion.identity);
+
+
+        nextPoop = Time.time + Random.Range(5f, 15f);
     }
 }
