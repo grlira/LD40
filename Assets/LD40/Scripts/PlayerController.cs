@@ -23,37 +23,48 @@ public class PlayerController : MonoBehaviour
 
     void Awake()
     {
-
+        
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (Camera.current != null)
+        {
+            var mouse = Camera.current.ScreenToWorldPoint(Input.mousePosition);
 
+            Vector3 dir = mouse - transform.position;
+            float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+            this.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+        }
     }
 
 
     void FixedUpdate()
     {
+        var velocity = Vector2.zero;
+
         if (Input.GetKey(KeyCode.W))
         {
-            myRigidBody.velocity = Vector2.up * speed;
+            velocity += Vector2.up * speed;
         }
-        else if (Input.GetKey(KeyCode.S))
+
+        if (Input.GetKey(KeyCode.S))
         {
-            myRigidBody.velocity = Vector2.down * speed;
+            velocity += Vector2.down * speed;
         }
 
         if (Input.GetKey(KeyCode.A))
         {
-            myRigidBody.velocity = Vector2.left * speed;
+            velocity += Vector2.left * speed;
         }
         else if (Input.GetKey(KeyCode.D))
         {
-            myRigidBody.velocity = Vector2.right * speed;
+            velocity += Vector2.right * speed;
         }
-        
 
+        if (velocity != Vector2.zero)
+            myRigidBody.velocity = velocity;
     }
 
 
