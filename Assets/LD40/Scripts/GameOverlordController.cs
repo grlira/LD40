@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class GameOverlordController : MonoBehaviour
 {
@@ -12,6 +13,11 @@ public class GameOverlordController : MonoBehaviour
     public ItemBase SelectedItem { get; private set; }
 
     private float nextCatTime;
+
+    private int catCounter;
+    public Text catCounterText;
+
+    public GameObject panelAdoptCat;
 
     private void Awake()
     {
@@ -33,14 +39,18 @@ public class GameOverlordController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (nextCatTime <= Time.time)
-        {
-            var newCat = Instantiate(catPrefab);
-            // TODO place cats in random position
+        if (!panelAdoptCat.activeSelf && nextCatTime <= Time.time)
+            panelAdoptCat.SetActive(true);
 
-            nextCatTime = generateNextCatTime();
-        }
+    }
 
+    private void CreateCat()
+    {
+        var newCat = Instantiate(catPrefab);
+        // TODO place cats in random position
+
+        catCounter++;
+        catCounterText.text = catCounter.ToString();
     }
 
     private float generateNextCatTime()
@@ -62,5 +72,20 @@ public class GameOverlordController : MonoBehaviour
             return;
 
         SelectedItem = null;
+    }
+
+    public void AdoptCat()
+    {
+        panelAdoptCat.SetActive(false);
+        
+        CreateCat();
+
+        nextCatTime = generateNextCatTime();
+    }
+
+    public void DontAdoptCat()
+    {
+        panelAdoptCat.SetActive(false);
+        nextCatTime = generateNextCatTime();
     }
 }

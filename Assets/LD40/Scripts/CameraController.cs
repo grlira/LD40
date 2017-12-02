@@ -26,7 +26,6 @@ public class CameraController : MonoBehaviour {
         mypos.y = tracking.transform.position.y;
 
         this.transform.position = mypos;
-
     }
 
     
