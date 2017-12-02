@@ -29,7 +29,7 @@ public class PlayerController : MonoBehaviour
         if (Camera.current != null)
         {
             var mouse = Camera.current.ScreenToWorldPoint(Input.mousePosition);
-
+            
             Vector3 dir = mouse - myTransform.position;
             float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
             this.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
@@ -57,6 +57,22 @@ public class PlayerController : MonoBehaviour
         {
             characterController.Move(Vector2.right * speed);
         }
+
+
+
+
+        // Use items
+        if(Input.GetKey(KeyCode.E))
+        {
+            var item = GameOverlordController.instance.SelectedItem;
+
+            if (item != null)
+            {
+                if (Vector2.Distance(item.transform.position, this.transform.position) < 2)
+                    item.OnItemUse(this);
+            }
+        }
+
     }
 
 

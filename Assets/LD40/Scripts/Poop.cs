@@ -2,15 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Poop : MonoBehaviour {
+public class Poop : ItemBase {
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-
-	}
+    public override void OnItemUse(PlayerController player)
+    {
+        Destroy(this.gameObject);
+    }
 }
