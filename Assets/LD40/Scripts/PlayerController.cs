@@ -38,34 +38,16 @@ public class PlayerController : MonoBehaviour
         if (playerToMouse != null)
         {
             Vector2 playerToMouseNotNull = (Vector2)playerToMouse;
-            float angle = getAngleFromPlayerToMouse(playerToMouseNotNull);
-            setPlayerOrientation(angle);
+            float angle = getPlayerAngle(playerToMouseNotNull);
+            setPlayerSprite(angle);
 
             Vector2 movementDirection = Vector2.zero;
             var characterController = GetComponent<TDCharacterController2D>();
 
-            if (angle < 0) angle = (360 - Mathf.Abs(angle - 180)) + 180;
-
-            if (angle > 337.5 || angle <= 22.5)
-                SetSprite(2);
-            else if (angle > 22.5 && angle <= 67.5)
-                SetSprite(1);
-            else if (angle > 67.5 && angle <= 112.5)
-                SetSprite(0);
-            else if (angle > 112.5 && angle <= 157.5)
-                SetSprite(7);
-            else if (angle > 157.5 && angle <= 202.5)
-                SetSprite(6);
-            else if (angle > 202.5 && angle <= 247.5)
-                SetSprite(5);
-            else if (angle > 247.5 && angle <= 292.5)
-                SetSprite(4);
-            else if (angle > 292.5 && angle <= 337.5)
-                SetSprite(3);
         
             if (Input.GetKey(KeyCode.W))
             {
-                characterController.Move(Vector2.up * speed);
+                movementDirection = playerToMouseNotNull;
             }
             if (Input.GetKey(KeyCode.S))
             {
@@ -114,14 +96,14 @@ public class PlayerController : MonoBehaviour
         return (mousePosition2D - new Vector2(myTransform.position.x, myTransform.position.y)).normalized;
     }
 
-    float getAngleFromPlayerToMouse(Vector2 playerToMouse)
+    float getPlayerAngle(Vector2 playerToMouse)
     {
         return Mathf.Atan2(playerToMouse.y, playerToMouse.x) * Mathf.Rad2Deg;
     }
 
-    void setPlayerOrientation(float angle)
+    void setPlayerSprite(float angle)
     {
-        this.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+        int index = Mathf.FloorToInt((angle + 22.5f + 180f)/45f) % 8;
+        SetSprite(index);
     }
-
 }
