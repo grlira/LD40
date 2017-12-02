@@ -171,7 +171,7 @@ GameObject:
   - component: {fileID: 495966998}
   - component: {fileID: 495966995}
   - component: {fileID: 495966994}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -191,7 +191,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   collisionLayers:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 4294966271
   raycastLead: 0.15
   drawDebug: 0
 --- !u!58 &495966995
@@ -317,7 +317,7 @@ GameObject:
   m_Component:
   - component: {fileID: 588655739}
   - component: {fileID: 588655740}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Circle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -381,48 +381,6 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
---- !u!1001 &951770093
-Prefab:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 4510739763442014, guid: 21eb4da19ba8cd04093dad7c59f4ce5c, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: 0.75778925
-      objectReference: {fileID: 0}
-    - target: {fileID: 4510739763442014, guid: 21eb4da19ba8cd04093dad7c59f4ce5c, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 0.43
-      objectReference: {fileID: 0}
-    - target: {fileID: 4510739763442014, guid: 21eb4da19ba8cd04093dad7c59f4ce5c, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4510739763442014, guid: 21eb4da19ba8cd04093dad7c59f4ce5c, type: 2}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4510739763442014, guid: 21eb4da19ba8cd04093dad7c59f4ce5c, type: 2}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4510739763442014, guid: 21eb4da19ba8cd04093dad7c59f4ce5c, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4510739763442014, guid: 21eb4da19ba8cd04093dad7c59f4ce5c, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4510739763442014, guid: 21eb4da19ba8cd04093dad7c59f4ce5c, type: 2}
-      propertyPath: m_RootOrder
-      value: 3
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_ParentPrefab: {fileID: 100100000, guid: 21eb4da19ba8cd04093dad7c59f4ce5c, type: 2}
-  m_IsPrefabParent: 0
 --- !u!1 &1633475472
 GameObject:
   m_ObjectHideFlags: 0
@@ -917,3 +875,4 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 21eb4da19ba8cd04093dad7c59f4ce5c, type: 2}
   m_IsPrefabParent: 0
+

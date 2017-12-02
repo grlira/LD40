@@ -33,55 +33,56 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        float angle = 0f;
-        if (Camera.main != null)
+        Vector2? playerToMouse = getPlayerToMouse();
+
+        if (playerToMouse != null)
         {
-            var mouse = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            Vector2 playerToMouseNotNull = (Vector2)playerToMouse;
+            float angle = getAngleFromPlayerToMouse(playerToMouseNotNull);
+            setPlayerOrientation(angle);
 
-            Vector3 dir = mouse - myTransform.position;
-            angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
-        }
+            Vector2 movementDirection = Vector2.zero;
+            var characterController = GetComponent<TDCharacterController2D>();
 
+            if (angle < 0) angle = (360 - Mathf.Abs(angle - 180)) + 180;
 
-        if (angle < 0) angle = (360 - Mathf.Abs(angle - 180)) + 180;
-
-        if (angle > 337.5 || angle <= 22.5)
-            SetSprite(2);
-        else if (angle > 22.5 && angle <= 67.5)
-            SetSprite(1);
-        else if (angle > 67.5 && angle <= 112.5)
-            SetSprite(0);
-        else if (angle > 112.5 && angle <= 157.5)
-            SetSprite(7);
-        else if (angle > 157.5 && angle <= 202.5)
-            SetSprite(6);
-        else if (angle > 202.5 && angle <= 247.5)
-            SetSprite(5);
-        else if (angle > 247.5 && angle <= 292.5)
-            SetSprite(4);
-        else if (angle > 292.5 && angle <= 337.5)
-            SetSprite(3);
-
-        var characterController = GetComponent<TDCharacterController2D>();
+            if (angle > 337.5 || angle <= 22.5)
+                SetSprite(2);
+            else if (angle > 22.5 && angle <= 67.5)
+                SetSprite(1);
+            else if (angle > 67.5 && angle <= 112.5)
+                SetSprite(0);
+            else if (angle > 112.5 && angle <= 157.5)
+                SetSprite(7);
+            else if (angle > 157.5 && angle <= 202.5)
+                SetSprite(6);
+            else if (angle > 202.5 && angle <= 247.5)
+                SetSprite(5);
+            else if (angle > 247.5 && angle <= 292.5)
+                SetSprite(4);
+            else if (angle > 292.5 && angle <= 337.5)
+                SetSprite(3);
         
-        if (Input.GetKey(KeyCode.W))
-        {
-            characterController.Move(Vector2.up * speed);
-        }
+            if (Input.GetKey(KeyCode.W))
+            {
+                characterController.Move(Vector2.up * speed);
+            }
+            if (Input.GetKey(KeyCode.S))
+            {
+                movementDirection = -playerToMouseNotNull;
+            }
 
-        if (Input.GetKey(KeyCode.S))
-        {
-            characterController.Move(Vector2.down * speed);
-        }
+            if (Input.GetKey(KeyCode.A))
+            {
+                movementDirection = Vector3.Cross(playerToMouseNotNull.normalized, Vector3.forward.normalized);
+            }
 
-        if (Input.GetKey(KeyCode.A))
-        {
-            characterController.Move(Vector2.left * speed);
-        }
+            if (Input.GetKey(KeyCode.D))
+            {
+                movementDirection = -Vector3.Cross(playerToMouseNotNull.normalized, Vector3.forward.normalized);
+            }
 
-        if (Input.GetKey(KeyCode.D))
-        {
-            characterController.Move(Vector2.right * speed);
+            characterController.Move(movementDirection * speed);
         }
     }
 
@@ -101,6 +102,26 @@ public class PlayerController : MonoBehaviour
         }   
     }
 
+    Vector2? getPlayerToMouse()
+    {
+        if (Camera.current == null)
+        {
+            return null;
+        }
 
+        var mousePosition = Camera.current.ScreenToWorldPoint(Input.mousePosition);
+        Vector2 mousePosition2D = new Vector2(mousePosition.x, mousePosition.y);
+        return (mousePosition2D - new Vector2(myTransform.position.x, myTransform.position.y)).normalized;
+    }
+
+    float getAngleFromPlayerToMouse(Vector2 playerToMouse)
+    {
+        return Mathf.Atan2(playerToMouse.y, playerToMouse.x) * Mathf.Rad2Deg;
+    }
+
+    void setPlayerOrientation(float angle)
+    {
+        this.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+    }
 
 }
