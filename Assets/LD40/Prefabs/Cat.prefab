@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 61002674035513762}
   - component: {fileID: 114509534320210136}
   - component: {fileID: 82128627424685248}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cat
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -181,6 +181,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 5
+  poopPrefab: {fileID: 1066756117853336, guid: 21eb4da19ba8cd04093dad7c59f4ce5c, type: 2}
 --- !u!212 &212589521959145036
 SpriteRenderer:
   m_ObjectHideFlags: 1
