@@ -16,8 +16,6 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         myTransform = this.transform;
-        myRigidBody = this.GetComponent<Rigidbody2D>();
-        myRigidBody.drag = 10;
     }
 
     void Awake()
@@ -64,7 +62,7 @@ public class PlayerController : MonoBehaviour
                 movementDirection = -Vector3.Cross(playerToMouseNotNull.normalized, Vector3.forward.normalized);
             }
 
-            characterController.Move(movementDirection * speed);
+            characterController.Move(movementDirection * Time.deltaTime * speed);
         }
 
 

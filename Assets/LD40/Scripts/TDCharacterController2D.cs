@@ -13,7 +13,7 @@ public class TDCharacterController2D : MonoBehaviour
     public float raycastLead = 0.15f;
 
     [Tooltip("Should the editor draw debug lines for collision tests?")]
-    public bool drawDebug = false;
+    public bool drawDebug = true;
 
     /// <summary>The radius of the CircleCollider2D attached to this GameObject.</summary>
     private float radius;
