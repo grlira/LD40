@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Prime31;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -37,34 +38,36 @@ public class PlayerController : MonoBehaviour
             float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
             this.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
         }
+
+
+        var characterController = GetComponent<TDCharacterController2D>();
+        
+        if (Input.GetKey(KeyCode.W))
+        {
+            characterController.Move(Vector2.up * speed);
+        }
+
+        if (Input.GetKey(KeyCode.S))
+        {
+            characterController.Move(Vector2.down * speed);
+        }
+
+        if (Input.GetKey(KeyCode.A))
+        {
+            characterController.Move(Vector2.left * speed);
+        }
+
+        if (Input.GetKey(KeyCode.D))
+        {
+            characterController.Move(Vector2.right * speed);
+        }
     }
 
 
     void FixedUpdate()
     {
-        var velocity = Vector2.zero;
+        
 
-        if (Input.GetKey(KeyCode.W))
-        {
-            velocity += Vector2.up * speed;
-        }
-
-        if (Input.GetKey(KeyCode.S))
-        {
-            velocity += Vector2.down * speed;
-        }
-
-        if (Input.GetKey(KeyCode.A))
-        {
-            velocity += Vector2.left * speed;
-        }
-        else if (Input.GetKey(KeyCode.D))
-        {
-            velocity += Vector2.right * speed;
-        }
-
-        if (velocity != Vector2.zero)
-            myRigidBody.velocity = velocity;
     }
 
 
