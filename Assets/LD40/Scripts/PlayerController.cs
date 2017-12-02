@@ -1,16 +1,27 @@
 ﻿using Prime31;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    [Serializable]
+    public class OldLadySpriteSide
+    {
+        public Sprite[] sprites;
+    }
+
     public float speed;
 
     private Rigidbody2D myRigidBody;
     private Transform myTransform;
 
-    public Sprite[] playerSprites;
+    public OldLadySpriteSide[] playerSprites;
+
+    private int animationFrame = 0;
+    private float nextAnimationFrame;
+    private float endAnimationFrame;
 
     // Use this for initialization
     void Start()
@@ -25,7 +36,7 @@ public class PlayerController : MonoBehaviour
 
     private void SetSprite(int side)
     {
-        this.GetComponent<SpriteRenderer>().sprite = playerSprites[side];
+        this.GetComponent<SpriteRenderer>().sprite = playerSprites[side].sprites[animationFrame];
     }
 
     // Update is called once per frame
@@ -46,20 +57,24 @@ public class PlayerController : MonoBehaviour
             if (Input.GetKey(KeyCode.W))
             {
                 movementDirection = playerToMouseNotNull;
+                endAnimationFrame = Time.time + 0.2f;
             }
             if (Input.GetKey(KeyCode.S))
             {
                 movementDirection = -playerToMouseNotNull;
+                endAnimationFrame = Time.time + 0.2f;
             }
 
             if (Input.GetKey(KeyCode.A))
             {
                 movementDirection = Vector3.Cross(playerToMouseNotNull.normalized, Vector3.forward.normalized);
+                endAnimationFrame = Time.time + 0.2f;
             }
 
             if (Input.GetKey(KeyCode.D))
             {
                 movementDirection = -Vector3.Cross(playerToMouseNotNull.normalized, Vector3.forward.normalized);
+                endAnimationFrame = Time.time + 0.2f;
             }
 
             characterController.Move(movementDirection * Time.deltaTime * speed);
@@ -80,6 +95,18 @@ public class PlayerController : MonoBehaviour
             }
         }
 
+        var isAnimating = false;
+        if (Time.time < this.endAnimationFrame)
+            isAnimating = true;
+
+        if (isAnimating && Time.time > this.nextAnimationFrame)
+        {
+            this.animationFrame++;
+            this.nextAnimationFrame = Time.time + 0.25f;
+
+            if(this.animationFrame >= 8)
+                this.animationFrame = 0;
+        }
     }
 
 
