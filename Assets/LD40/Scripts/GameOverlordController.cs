@@ -49,7 +49,7 @@ public class GameOverlordController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!panelAdoptCat.activeSelf && nextCatTime <= Time.time)
+        if (!panelAdoptCat.activeSelf && nextCatTime <= Time.time && partyRemainingTime <= 0)
         {
             panelAdoptCat.SetActive(true);
         }
