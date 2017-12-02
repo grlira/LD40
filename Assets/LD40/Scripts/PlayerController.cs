@@ -66,6 +66,22 @@ public class PlayerController : MonoBehaviour
 
             characterController.Move(movementDirection * speed);
         }
+
+
+
+
+        // Use items
+        if(Input.GetKey(KeyCode.E))
+        {
+            var item = GameOverlordController.instance.SelectedItem;
+
+            if (item != null)
+            {
+                if (Vector2.Distance(item.transform.position, this.transform.position) < 2)
+                    item.OnItemUse(this);
+            }
+        }
+
     }
 
 

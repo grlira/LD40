@@ -9,6 +9,8 @@ public class GameOverlordController : MonoBehaviour
     public static GameOverlordController instance;
     public GameObject catPrefab;
 
+    public ItemBase SelectedItem { get; private set; }
+
     private float nextCatTime;
 
     private void Awake()
@@ -47,5 +49,18 @@ public class GameOverlordController : MonoBehaviour
             MIN_CAT_CREATION_INTERVAL,
             MAX_CAT_CREATION_INTERVAL
         );
+    }
+
+    public void SetSelectedItem(ItemBase item)
+    {
+        SelectedItem = item;
+    }
+
+    public void ClearSelectedItem(ItemBase item=null)
+    {
+        if (item != null && SelectedItem != item)
+            return;
+
+        SelectedItem = null;
     }
 }

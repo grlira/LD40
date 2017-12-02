@@ -6,6 +6,13 @@ public class CameraController : MonoBehaviour {
 
     public GameObject tracking;
 
+    private Camera myCamera;
+
+    private void Awake()
+    {
+        myCamera = this.GetComponent<Camera>();
+    }
+
 	// Use this for initialization
 	void Start () {
 		
@@ -19,5 +26,8 @@ public class CameraController : MonoBehaviour {
         mypos.y = tracking.transform.position.y;
 
         this.transform.position = mypos;
+
     }
+
+    
 }
