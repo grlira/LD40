@@ -26,36 +26,37 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Camera.current != null)
+        Vector2? playerToMouse = getPlayerToMouse();
+
+        if (playerToMouse != null)
         {
-            var mouse = Camera.current.ScreenToWorldPoint(Input.mousePosition);
+            Vector2 playerToMouseNotNull = (Vector2)playerToMouse;
+            setPlayerOrientation((Vector2) playerToMouse);
 
-            Vector3 dir = mouse - myTransform.position;
-            float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
-            this.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
-        }
+            Vector2 movementDirection = Vector2.zero;
+            var characterController = GetComponent<TDCharacterController2D>();
 
+            if (Input.GetKey(KeyCode.W))
+            {
+                movementDirection = playerToMouseNotNull;
+            }
 
-        var characterController = GetComponent<TDCharacterController2D>();
-        
-        if (Input.GetKey(KeyCode.W))
-        {
-            characterController.Move(Vector2.up * speed);
-        }
+            if (Input.GetKey(KeyCode.S))
+            {
+                movementDirection = -playerToMouseNotNull;
+            }
 
-        if (Input.GetKey(KeyCode.S))
-        {
-            characterController.Move(Vector2.down * speed);
-        }
+            if (Input.GetKey(KeyCode.A))
+            {
+                movementDirection = Vector3.Cross(playerToMouseNotNull.normalized, Vector3.forward.normalized);
+            }
 
-        if (Input.GetKey(KeyCode.A))
-        {
-            characterController.Move(Vector2.left * speed);
-        }
+            if (Input.GetKey(KeyCode.D))
+            {
+                movementDirection = -Vector3.Cross(playerToMouseNotNull.normalized, Vector3.forward.normalized);
+            }
 
-        if (Input.GetKey(KeyCode.D))
-        {
-            characterController.Move(Vector2.right * speed);
+            characterController.Move(movementDirection * speed);
         }
     }
 
@@ -75,6 +76,22 @@ public class PlayerController : MonoBehaviour
         }   
     }
 
+    Vector2? getPlayerToMouse()
+    {
+        if (Camera.current == null)
+        {
+            return null;
+        }
 
+        var mousePosition = Camera.current.ScreenToWorldPoint(Input.mousePosition);
+        Vector2 mousePosition2D = new Vector2(mousePosition.x, mousePosition.y);
+        return (mousePosition2D - new Vector2(myTransform.position.x, myTransform.position.y)).normalized;
+    }
+
+    void setPlayerOrientation(Vector2 playerToMouse)
+    {
+        float playerOrientation = Mathf.Atan2(playerToMouse.y, playerToMouse.x);
+        this.transform.rotation = Quaternion.AngleAxis(playerOrientation * Mathf.Rad2Deg, Vector3.forward);
+    }
 
 }
