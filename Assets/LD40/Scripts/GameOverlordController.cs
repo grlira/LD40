@@ -17,6 +17,11 @@ public class GameOverlordController : MonoBehaviour
     private int catCounter;
     public Text catCounterText;
 
+    private int prevCatsRequiredForParty = 0;
+    private int catsRequiredForParty = 1;
+    public Text requiredCounterText;
+    public Button teaPartyButton;
+
     public GameObject panelAdoptCat;
 
     private void Awake()
@@ -34,6 +39,7 @@ public class GameOverlordController : MonoBehaviour
     void Start()
     {
         nextCatTime = generateNextCatTime();
+        requiredCounterText.text = catsRequiredForParty.ToString();
     }
 
     // Update is called once per frame
@@ -51,6 +57,10 @@ public class GameOverlordController : MonoBehaviour
 
         catCounter++;
         catCounterText.text = catCounter.ToString();
+        if (catCounter >= catsRequiredForParty)
+        {
+            teaPartyButton.gameObject.SetActive(true);
+        }
     }
 
     private float generateNextCatTime()
@@ -87,5 +97,14 @@ public class GameOverlordController : MonoBehaviour
     {
         panelAdoptCat.SetActive(false);
         nextCatTime = generateNextCatTime();
+    }
+
+    public void StartTeaParty()
+    {
+        int temp = catsRequiredForParty;
+        catsRequiredForParty = prevCatsRequiredForParty + catsRequiredForParty;
+        prevCatsRequiredForParty = temp;
+        requiredCounterText.text = catsRequiredForParty.ToString();
+        teaPartyButton.gameObject.SetActive(false);
     }
 }
