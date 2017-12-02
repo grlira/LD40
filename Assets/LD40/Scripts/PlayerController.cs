@@ -32,6 +32,9 @@ public class PlayerController : MonoBehaviour
             var mouse = Camera.current.ScreenToWorldPoint(Input.mousePosition);
 
             dir = (mouse - myTransform.position).normalized;
+            float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+            this.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+
         }
 
         var up = new Vector3(0.0f, 0.0f, 1.0f);
