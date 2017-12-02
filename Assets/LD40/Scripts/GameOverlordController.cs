@@ -17,10 +17,10 @@ public class GameOverlordController : MonoBehaviour
     private int catCounter;
     public Text catCounterText;
 
-    private int prevCatsRequiredForParty = 0;
+    private int prevCatsRequiredForParty = 1;
     private int catsRequiredForParty = 1;
     public Text requiredCounterText;
-    public Button teaPartyButton;
+    public Button kittyPartyButton;
 
     public GameObject panelAdoptCat;
 
@@ -59,7 +59,7 @@ public class GameOverlordController : MonoBehaviour
         catCounterText.text = catCounter.ToString();
         if (catCounter >= catsRequiredForParty)
         {
-            teaPartyButton.gameObject.SetActive(true);
+            kittyPartyButton.gameObject.SetActive(true);
         }
     }
 
@@ -99,12 +99,12 @@ public class GameOverlordController : MonoBehaviour
         nextCatTime = generateNextCatTime();
     }
 
-    public void StartTeaParty()
+    public void StartKittyParty()
     {
         int temp = catsRequiredForParty;
         catsRequiredForParty = prevCatsRequiredForParty + catsRequiredForParty;
         prevCatsRequiredForParty = temp;
         requiredCounterText.text = catsRequiredForParty.ToString();
-        teaPartyButton.gameObject.SetActive(false);
+        kittyPartyButton.gameObject.SetActive(false);
     }
 }

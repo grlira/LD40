@@ -350,7 +350,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Tea Party
+  m_Text: Kitty party
 --- !u!222 &148082897
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1019,7 +1019,7 @@ GameObject:
   - component: {fileID: 1235451072}
   - component: {fileID: 1235451071}
   m_Layer: 5
-  m_Name: '[Panel] Tea Party'
+  m_Name: '[Panel] Kitty Party'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1498,7 +1498,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1633945981}
-        m_MethodName: StartTeaParty
+        m_MethodName: StartKittyParty
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1666,7 +1666,7 @@ MonoBehaviour:
   catPrefab: {fileID: 1068859802553488, guid: 03bda349460a9fa4b9c3a1c8622db114, type: 2}
   catCounterText: {fileID: 1500021165}
   requiredCounterText: {fileID: 578697870}
-  teaPartyButton: {fileID: 1537899375}
+  kittyPartyButton: {fileID: 1537899375}
   panelAdoptCat: {fileID: 2054940725}
 --- !u!4 &1633945982
 Transform:
