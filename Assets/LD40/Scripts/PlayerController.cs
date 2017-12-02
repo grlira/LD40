@@ -5,26 +5,22 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-
-    public int health;
-    public PlayerController controller;
-
     public float speed;
 
-
-
     private Rigidbody2D myRigidBody;
+    private Transform myTransform;
 
     // Use this for initialization
     void Start()
     {
+        myTransform = this.transform;
         myRigidBody = this.GetComponent<Rigidbody2D>();
         myRigidBody.drag = 10;
     }
 
     void Awake()
     {
-        
+
     }
 
     // Update is called once per frame
@@ -34,7 +30,7 @@ public class PlayerController : MonoBehaviour
         {
             var mouse = Camera.current.ScreenToWorldPoint(Input.mousePosition);
 
-            Vector3 dir = mouse - transform.position;
+            Vector3 dir = mouse - myTransform.position;
             float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
             this.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
         }
@@ -68,6 +64,15 @@ public class PlayerController : MonoBehaviour
     {
         
 
+    }
+
+
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        if(collision.gameObject.GetComponent<Poop>() != null)
+        {
+            Destroy(collision.gameObject);
+        }   
     }
 
 
