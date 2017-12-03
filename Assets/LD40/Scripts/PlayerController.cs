@@ -86,16 +86,6 @@ public class PlayerController : MonoBehaviour
     void FixedUpdate()
     {
         
-
-    }
-
-
-    void OnCollisionEnter2D(Collision2D collision)
-    {
-        if(collision.gameObject.GetComponent<Poop>() != null)
-        {
-            Destroy(collision.gameObject);
-        }   
     }
 
     Vector2? getPlayerToMouse()

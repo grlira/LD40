@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using System.Collections.Generic;
 
 public class GameOverlordController : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class GameOverlordController : MonoBehaviour
 
     public static GameOverlordController instance;
     public GameObject catPrefab;
+    public GameObject visitorPrefab;
 
     public ItemBase SelectedItem { get; private set; }
 
@@ -16,6 +18,9 @@ public class GameOverlordController : MonoBehaviour
 
     private int catCounter;
     public Text catCounterText;
+
+    private int prestigeCounter;
+    public Text prestigeCounterText;
 
     private int prevCatsRequiredForParty = 1;
     private int catsRequiredForParty = 1;
@@ -28,6 +33,9 @@ public class GameOverlordController : MonoBehaviour
 
     public GameObject panelAdoptCat;
 
+    private List<GameObject> visitors = new List<GameObject>();
+    private bool isPartyActive = false;
+    
     private void Awake()
     {
         if (instance != null && instance != this)
@@ -58,10 +66,17 @@ public class GameOverlordController : MonoBehaviour
         {
             partyRemainingTime -= Time.deltaTime;
             clockText.text = Mathf.FloorToInt(partyRemainingTime).ToString();
-        } else
+        } else if(isPartyActive)
         {
+            isPartyActive = false;
             clockText.gameObject.SetActive(false);
             clockImage.gameObject.SetActive(false);
+            prestigeCounter += visitors.Count;
+            prestigeCounterText.text = prestigeCounter.ToString();
+            foreach(var visitor in visitors)
+            {
+                Destroy(visitor);
+            }
         }
 
     }
@@ -77,6 +92,19 @@ public class GameOverlordController : MonoBehaviour
         {
             kittyPartyButton.gameObject.SetActive(true);
         }
+    }
+
+    private void CreateVisitor()
+    {
+        var newVisitor = Instantiate(visitorPrefab);
+        visitors.Add(newVisitor);
+        // TODO place visitors in random position
+    }
+
+    public void DestroyVisitor(GameObject visitor)
+    {
+        visitors.Remove(visitor);
+        Destroy(visitor);
     }
 
     private float generateNextCatTime()
@@ -117,6 +145,11 @@ public class GameOverlordController : MonoBehaviour
 
     public void StartKittyParty()
     {
+        for (int i = 0; i < catsRequiredForParty; i++)
+        {
+            CreateVisitor();
+        }
+
         int temp = catsRequiredForParty;
         catsRequiredForParty = prevCatsRequiredForParty + catsRequiredForParty;
         prevCatsRequiredForParty = temp;
@@ -128,5 +161,6 @@ public class GameOverlordController : MonoBehaviour
         clockText.text = Mathf.FloorToInt(partyRemainingTime).ToString();
         clockText.gameObject.SetActive(true);
         clockImage.gameObject.SetActive(true);
+        isPartyActive = true;
     }
 }
