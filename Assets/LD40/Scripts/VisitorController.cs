@@ -14,12 +14,16 @@ public class VisitorController : MonoBehaviour
     private Rigidbody2D myRigidBody;
     private float destructionTime = 0;
 
+    public Sprite[] sprites;
+
 
     // Use this for initialization
     void Start()
     {
         myRigidBody = this.GetComponent<Rigidbody2D>();
         myRigidBody.drag = 10;
+
+        GetComponent<SpriteRenderer>().sprite = sprites[Random.Range(0, sprites.Length)];
     }
 
     // Update is called once per frame
