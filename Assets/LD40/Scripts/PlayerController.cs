@@ -117,12 +117,7 @@ public class PlayerController : MonoBehaviour
 
     Vector2? getPlayerToMouse()
     {
-        if (Camera.current == null)
-        {
-            return null;
-        }
-
-        var mousePosition = Camera.current.ScreenToWorldPoint(Input.mousePosition);
+        var mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         Vector2 mousePosition2D = new Vector2(mousePosition.x, mousePosition.y);
         return (mousePosition2D - new Vector2(myTransform.position.x, myTransform.position.y)).normalized;
     }
