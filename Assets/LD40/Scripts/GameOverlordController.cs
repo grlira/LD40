@@ -95,7 +95,6 @@ public class GameOverlordController : MonoBehaviour
         var vTopRight = bounds.center + bounds.extents - new Vector3(1, 1, 0);
 
 
-        Debug.Log(mapCollider2D.transform.position + " || " + mapCollider2D.bounds.ToString() + " || " + vBottomLeft + " || " + vTopRight);
         int spawnTries = 0;
         do
         {
