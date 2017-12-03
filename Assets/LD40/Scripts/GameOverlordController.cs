@@ -19,6 +19,8 @@ public class GameOverlordController : MonoBehaviour
 
     public GameObject panelAdoptCat;
 
+    public GameObject mapGameObject;
+
     private void Awake()
     {
         if (instance != null && instance != this)
@@ -46,9 +48,37 @@ public class GameOverlordController : MonoBehaviour
 
     private void CreateCat()
     {
-        var newCat = Instantiate(catPrefab);
-        // TODO place cats in random position
+        // Spawn cat in a randomly position on the house
+        var mapCollider2D = mapGameObject.GetComponent<Collider2D>();
+        if (mapCollider2D == null)
+            mapCollider2D = mapGameObject.GetComponentInChildren<Collider2D>();
 
+        var bounds = mapCollider2D.bounds;
+        var vBottomLeft = (mapCollider2D.transform.position + bounds.center) - bounds.extents;
+        var vTopRight = (mapCollider2D.transform.position + bounds.center) + bounds.extents;
+
+        bool spawned = false;
+        int spawnTries = 0;
+        do {
+            var pos = new Vector3(Random.Range(vBottomLeft.x, vTopRight.x), Random.Range(vBottomLeft.y, vTopRight.y));
+            var ray = new Ray(pos, Vector3.back);
+
+            if(Physics2D.OverlapCircle(pos,0.5f) == null)
+            {
+                var newCat = Instantiate(catPrefab);
+                newCat.transform.position = pos;
+                spawned = true;
+            }
+        }
+        while (!spawned && ++spawnTries < 250);
+
+        if(spawnTries == 250)
+        {
+            Debug.LogError("Failed to find a suitable place for spawning a cat");
+            return;
+        }
+
+        // Increase cat counter
         catCounter++;
         catCounterText.text = catCounter.ToString();
     }
