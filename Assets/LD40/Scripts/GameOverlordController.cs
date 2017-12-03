@@ -28,8 +28,9 @@ public class GameOverlordController : MonoBehaviour
     public Button kittyPartyButton;
 
     private float partyRemainingTime;
+
+    public GameObject clockPanel;
     public Text clockText;
-    public Image clockImage;
 
     public GameObject panelAdoptCat;
 
@@ -72,8 +73,7 @@ public class GameOverlordController : MonoBehaviour
         } else if(isPartyActive)
         {
             isPartyActive = false;
-            clockText.gameObject.SetActive(false);
-            clockImage.gameObject.SetActive(false);
+            clockPanel.gameObject.SetActive(false);
             prestigeCounter += visitors.Count;
             prestigeCounterText.text = prestigeCounter.ToString();
             foreach(var visitor in visitors)
@@ -202,12 +202,10 @@ public class GameOverlordController : MonoBehaviour
         prevCatsRequiredForParty = temp;
         requiredCounterText.text = catsRequiredForParty.ToString();
         kittyPartyButton.gameObject.SetActive(false);
-        clockImage.gameObject.SetActive(true);
+        clockPanel.gameObject.SetActive(true);
 
         partyRemainingTime = 30;
         clockText.text = Mathf.FloorToInt(partyRemainingTime).ToString();
-        clockText.gameObject.SetActive(true);
-        clockImage.gameObject.SetActive(true);
         isPartyActive = true;
     }
 }
