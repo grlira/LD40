@@ -36,6 +36,9 @@ public class GameOverlordController : MonoBehaviour
     private List<GameObject> visitors = new List<GameObject>();
     private bool isPartyActive = false;
     
+
+    public GameObject mapGameObject;
+
     private void Awake()
     {
         if (instance != null && instance != this)
@@ -81,24 +84,66 @@ public class GameOverlordController : MonoBehaviour
 
     }
 
+    public Vector2 GenerateRandomSpawnPoint()
+    {
+        var mapCollider2D = mapGameObject.GetComponent<Collider2D>();
+        if (mapCollider2D == null)
+            mapCollider2D = mapGameObject.GetComponentInChildren<Collider2D>();
+
+        var bounds = mapCollider2D.bounds;
+        var vBottomLeft = (mapCollider2D.transform.position + bounds.center) - bounds.extents;
+        var vTopRight = (mapCollider2D.transform.position + bounds.center) + bounds.extents;
+
+        int spawnTries = 0;
+        do
+        {
+            var pos = new Vector3(Random.Range(vBottomLeft.x, vTopRight.x), Random.Range(vBottomLeft.y, vTopRight.y));
+
+            if (Physics2D.OverlapCircle(pos, 0.5f) == null)
+            {
+                return pos;
+            }
+        }
+        while (++spawnTries < 250);
+        throw new System.Exception("Failed to generate random position");
+    }
+
     private void CreateCat()
     {
-        var newCat = Instantiate(catPrefab);
-        // TODO place cats in random position
-
-        catCounter++;
-        catCounterText.text = catCounter.ToString();
-        if (catCounter >= catsRequiredForParty)
+        
+        try
         {
-            kittyPartyButton.gameObject.SetActive(true);
+            Vector2 pos = GenerateRandomSpawnPoint();
+            var newCat = Instantiate(catPrefab);
+            newCat.transform.position = pos;
+            
+            // Increase cat counter
+            catCounter++;
+            catCounterText.text = catCounter.ToString();
+            if (catCounter >= catsRequiredForParty)
+            {
+                kittyPartyButton.gameObject.SetActive(true);
+            }
+        }
+        catch (System.Exception e)
+        {
+            Debug.LogError(e.ToString());
         }
     }
 
     private void CreateVisitor()
     {
-        var newVisitor = Instantiate(visitorPrefab);
-        visitors.Add(newVisitor);
-        // TODO place visitors in random position
+        try
+        {
+            Vector2 pos = GenerateRandomSpawnPoint();
+            var newVisitor = Instantiate(visitorPrefab);
+            visitors.Add(newVisitor);
+            newVisitor.transform.position = pos;
+        }
+        catch (System.Exception e)
+        {
+            Debug.LogError(e.ToString());
+        }
     }
 
     public void DestroyVisitor(GameObject visitor)
