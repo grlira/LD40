@@ -91,15 +91,17 @@ public class GameOverlordController : MonoBehaviour
             mapCollider2D = mapGameObject.GetComponentInChildren<Collider2D>();
 
         var bounds = mapCollider2D.bounds;
-        var vBottomLeft = (mapCollider2D.transform.position + bounds.center) - bounds.extents;
-        var vTopRight = (mapCollider2D.transform.position + bounds.center) + bounds.extents;
+        var vBottomLeft = bounds.center - bounds.extents + new Vector3(1,1,0);
+        var vTopRight = bounds.center + bounds.extents - new Vector3(1, 1, 0);
 
+
+        Debug.Log(mapCollider2D.transform.position + " || " + mapCollider2D.bounds.ToString() + " || " + vBottomLeft + " || " + vTopRight);
         int spawnTries = 0;
         do
         {
             var pos = new Vector3(Random.Range(vBottomLeft.x, vTopRight.x), Random.Range(vBottomLeft.y, vTopRight.y));
 
-            if (Physics2D.OverlapCircle(pos, 0.5f) == null)
+            if (Physics2D.OverlapCircle(pos, 0.75f) == null)
             {
                 return pos;
             }
