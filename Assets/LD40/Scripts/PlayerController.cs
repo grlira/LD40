@@ -84,7 +84,7 @@ public class PlayerController : MonoBehaviour
 
 
         // Use items
-        if(Input.GetKey(KeyCode.E))
+        if(Input.GetKeyDown(KeyCode.E))
         {
             var item = GameOverlordController.instance.SelectedItem;
 

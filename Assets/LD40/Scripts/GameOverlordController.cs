@@ -74,8 +74,7 @@ public class GameOverlordController : MonoBehaviour
         {
             isPartyActive = false;
             clockPanel.gameObject.SetActive(false);
-            prestigeCounter += visitors.Count;
-            prestigeCounterText.text = prestigeCounter.ToString();
+            AddPrestige(visitors.Count);
             foreach(var visitor in visitors)
             {
                 Destroy(visitor);
@@ -104,6 +103,12 @@ public class GameOverlordController : MonoBehaviour
         {
             SetSelectedItem(null);
         }
+    }
+
+    void AddPrestige(int amount)
+    {
+        prestigeCounter += amount;
+        prestigeCounterText.text = prestigeCounter.ToString();
     }
 
     public Vector2 GenerateRandomSpawnPoint()
@@ -173,6 +178,7 @@ public class GameOverlordController : MonoBehaviour
     {
         visitors.Remove(visitor);
         Destroy(visitor);
+        AddPrestige(-1);
     }
 
     private float generateNextCatTime()
@@ -191,7 +197,9 @@ public class GameOverlordController : MonoBehaviour
                 SelectedItem.OnItemDeselected();
 
             SelectedItem = item;
-            SelectedItem.OnItemSelected();
+
+            if(SelectedItem != null)
+                SelectedItem.OnItemSelected();
         }
         
     }
