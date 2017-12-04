@@ -20,6 +20,9 @@ public class CameraController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+        if (tracking == null)
+            return;
+
         var mypos = this.transform.position;
 
         mypos.x = tracking.transform.position.x;

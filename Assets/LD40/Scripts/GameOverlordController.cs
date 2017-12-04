@@ -2,6 +2,7 @@
 using System.Collections;
 using UnityEngine.UI;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 
 public class GameOverlordController : MonoBehaviour
 {
@@ -11,6 +12,8 @@ public class GameOverlordController : MonoBehaviour
     public static GameOverlordController instance;
     public GameObject catPrefab;
     public GameObject visitorPrefab;
+
+    public GameObject uiPanelGame, uiPanelGameOver;
 
     public ItemBase SelectedItem { get; private set; }
 
@@ -109,6 +112,27 @@ public class GameOverlordController : MonoBehaviour
     {
         prestigeCounter += amount;
         prestigeCounterText.text = prestigeCounter.ToString();
+
+        if(prestigeCounter < 0)
+        {
+            GameOver();
+        }
+    }
+
+    public void GameOver()
+    {
+        uiPanelGame.SetActive(false);
+        uiPanelGameOver.SetActive(true);
+
+        uiPanelGameOver.GetComponent<GameOverController>().FadeOut();
+
+        Destroy(FindObjectOfType<PlayerController>().gameObject);
+
+        // Follow a random cat
+        var cats = FindObjectsOfType<CatController>();
+        Camera.main.GetComponent<CameraController>().tracking = cats[Random.Range(0, cats.Length)].gameObject;
+
+        
     }
 
     public Vector2 GenerateRandomSpawnPoint()
@@ -237,5 +261,10 @@ public class GameOverlordController : MonoBehaviour
         partyRemainingTime = 30;
         clockText.text = Mathf.FloorToInt(partyRemainingTime).ToString();
         isPartyActive = true;
+    }
+
+    public void BackToMainMenu()
+    {
+        SceneManager.LoadScene("MainMenu");
     }
 }
