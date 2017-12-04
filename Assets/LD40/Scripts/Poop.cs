@@ -9,6 +9,8 @@ public class Poop : ItemBase
 
     public GameObject cleaningPrefab;
 
+    public GameObject outline;
+
     private float nextAnimation;
 
     private void Update()
@@ -27,6 +29,16 @@ public class Poop : ItemBase
                 renderer.sprite = sprite1;
             }
         }
+    }
+
+    public override void OnItemSelected()
+    {
+        outline.SetActive(true);
+    }
+
+    public override void OnItemDeselected()
+    {
+        outline.SetActive(false);
     }
 
     public override void OnItemUse(PlayerController player)

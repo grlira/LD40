@@ -56,3 +56,6 @@ TagManager:
   - name: Player
     uniqueID: 2515286617
     locked: 0
+  - name: Outline
+    uniqueID: 3114500437
+    locked: 0
