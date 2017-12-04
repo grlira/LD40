@@ -7,6 +7,8 @@ public class Poop : ItemBase
 
     public Sprite sprite1, sprite2;
 
+    public GameObject cleaningPrefab;
+
     private float nextAnimation;
 
     private void Update()
@@ -29,6 +31,19 @@ public class Poop : ItemBase
 
     public override void OnItemUse(PlayerController player)
     {
+        StartCoroutine(CleaningAnimation());
+        
+    }
+
+    private IEnumerator CleaningAnimation()
+    {
+        this.GetComponent<Collider2D>().enabled = false;
+        var go = Instantiate(cleaningPrefab);
+        go.transform.position = transform.position;
+
+        yield return new WaitForSeconds(1);
+
+        Destroy(go);
         Destroy(this.gameObject);
     }
 }
