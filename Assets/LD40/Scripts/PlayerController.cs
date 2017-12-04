@@ -23,10 +23,14 @@ public class PlayerController : MonoBehaviour
     private float nextAnimationFrame;
     private float endAnimationFrame;
 
+    private Helpers.MovementType movementType;
+
     // Use this for initialization
     void Start()
     {
         myTransform = this.transform;
+
+        movementType = Helpers.GetOptionsMovementType();
     }
 
     void Awake()
@@ -42,50 +46,81 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
-        Vector2? playerToMouse = getPlayerToMouse();
+        Vector2 playerToMouse = getPlayerToMouse();
 
-        if (playerToMouse != null)
+        Vector2 playerToMouseNotNull = (Vector2)playerToMouse;
+        float angle = getPlayerAngle(playerToMouseNotNull);
+        setPlayerSprite(angle);
+
+
+        Vector2 movementDirection = Vector2.zero;
+        var characterController = GetComponent<TDCharacterController2D>();
+
+        if (movementType == Helpers.MovementType.TowardsMouse)
         {
-            Vector2 playerToMouseNotNull = (Vector2)playerToMouse;
-            float angle = getPlayerAngle(playerToMouseNotNull);
-            setPlayerSprite(angle);
-
-            Vector2 movementDirection = Vector2.zero;
-            var characterController = GetComponent<TDCharacterController2D>();
-
-        
             if (Input.GetKey(KeyCode.W))
             {
-                movementDirection = playerToMouseNotNull;
+                movementDirection += playerToMouseNotNull;
                 endAnimationFrame = Time.time + 0.2f;
             }
             if (Input.GetKey(KeyCode.S))
             {
-                movementDirection = -playerToMouseNotNull;
+                movementDirection += -playerToMouseNotNull;
                 endAnimationFrame = Time.time + 0.2f;
             }
 
             if (Input.GetKey(KeyCode.A))
             {
-                movementDirection = Vector3.Cross(playerToMouseNotNull.normalized, Vector3.forward.normalized);
+                movementDirection = Vector3.Cross(Vector3.forward.normalized, playerToMouseNotNull.normalized);
                 endAnimationFrame = Time.time + 0.2f;
             }
 
             if (Input.GetKey(KeyCode.D))
             {
-                movementDirection = -Vector3.Cross(playerToMouseNotNull.normalized, Vector3.forward.normalized);
+                movementDirection = -Vector3.Cross(Vector3.forward.normalized, playerToMouseNotNull.normalized);
+                endAnimationFrame = Time.time + 0.2f;
+            }
+        }
+        else
+        {
+            if (Input.GetKey(KeyCode.W))
+            {
+                movementDirection += Vector2.up;
+                endAnimationFrame = Time.time + 0.2f;
+            }
+            if (Input.GetKey(KeyCode.S))
+            {
+                movementDirection += Vector2.down;
                 endAnimationFrame = Time.time + 0.2f;
             }
 
-            characterController.Move(movementDirection * Time.deltaTime * speed);
+            if (Input.GetKey(KeyCode.A))
+            {
+                movementDirection += Vector2.left;
+                endAnimationFrame = Time.time + 0.2f;
+            }
+
+            if (Input.GetKey(KeyCode.D))
+            {
+                movementDirection += Vector2.right;
+                endAnimationFrame = Time.time + 0.2f;
+            }
+
+            
         }
+
+        movementDirection = movementDirection * speed;
+
+        if (movementDirection.magnitude > speed)
+            movementDirection = movementDirection.normalized * speed;
+
+        characterController.Move(movementDirection * Time.deltaTime);
 
 
 
 
         // Use items
-        if(Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.E))
         {
             var item = GameOverlordController.instance.SelectedItem;
 
@@ -116,7 +151,7 @@ public class PlayerController : MonoBehaviour
         
     }
 
-    Vector2? getPlayerToMouse()
+    Vector2 getPlayerToMouse()
     {
         var mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         Vector2 mousePosition2D = new Vector2(mousePosition.x, mousePosition.y);
