@@ -15,6 +15,8 @@ public class GameOverlordController : MonoBehaviour
 
     public GameObject uiPanelGame, uiPanelGameOver;
 
+    public AudioClip audioGameOver, audioBells;
+
     public ItemBase SelectedItem { get; private set; }
 
     private float nextCatTime;
@@ -106,6 +108,13 @@ public class GameOverlordController : MonoBehaviour
         {
             SetSelectedItem(null);
         }
+
+
+        if(nextBellSound > 0 && Time.time >= nextBellSound)
+        {
+            this.GetComponent<AudioSource>().PlayOneShot(audioBells, 0.75f);
+            NextBell();
+        }
     }
 
     void AddPrestige(int amount)
@@ -119,6 +128,8 @@ public class GameOverlordController : MonoBehaviour
         }
     }
 
+
+    private float nextBellSound;
     public void GameOver()
     {
         uiPanelGame.SetActive(false);
@@ -132,7 +143,14 @@ public class GameOverlordController : MonoBehaviour
         var cats = FindObjectsOfType<CatController>();
         Camera.main.GetComponent<CameraController>().tracking = cats[Random.Range(0, cats.Length)].gameObject;
 
-        
+
+        GetComponent<AudioSource>().PlayOneShot(audioGameOver, 1f);
+        NextBell();
+    }
+
+    private void NextBell()
+    {
+        nextBellSound = Time.time + Random.Range(3f, 10f);
     }
 
     public Vector2 GenerateRandomSpawnPoint()
