@@ -41,7 +41,7 @@ public class Poop : ItemBase
         var go = Instantiate(cleaningPrefab);
         go.transform.position = transform.position;
 
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(1.5f);
 
         Destroy(go);
         Destroy(this.gameObject);

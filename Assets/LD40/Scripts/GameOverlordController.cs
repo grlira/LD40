@@ -82,6 +82,28 @@ public class GameOverlordController : MonoBehaviour
             }
         }
 
+        // Get selected item
+        var mouse = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        mouse.z = 0;
+
+        Collider2D collider;
+        if((collider = Physics2D.OverlapCircle(mouse,0.25f,LayerMask.GetMask("Items"))) != null)
+        {
+            var item = collider.GetComponent<ItemBase>();
+
+            if(item != null)
+            {
+                SetSelectedItem(item);
+            }
+            else
+            {
+                SetSelectedItem(null);
+            }
+        }
+        else
+        {
+            SetSelectedItem(null);
+        }
     }
 
     public Vector2 GenerateRandomSpawnPoint()
@@ -163,16 +185,17 @@ public class GameOverlordController : MonoBehaviour
 
     public void SetSelectedItem(ItemBase item)
     {
-        SelectedItem = item;
+        if(SelectedItem != item)
+        {
+            if (SelectedItem != null)
+                SelectedItem.OnItemDeselected();
+
+            SelectedItem = item;
+            SelectedItem.OnItemSelected();
+        }
+        
     }
 
-    public void ClearSelectedItem(ItemBase item=null)
-    {
-        if (item != null && SelectedItem != item)
-            return;
-
-        SelectedItem = null;
-    }
 
     public void AdoptCat()
     {

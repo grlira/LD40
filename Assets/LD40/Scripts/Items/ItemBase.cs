@@ -4,17 +4,14 @@ using UnityEngine;
 
 public class ItemBase : MonoBehaviour {
 
-    private void OnMouseEnter()
-    {
-        GameOverlordController.instance.SetSelectedItem(this);
 
+    public virtual void OnItemSelected()
+    {
         this.GetComponent<SpriteRenderer>().color = Color.yellow;
     }
 
-    private void OnMouseExit()
+    public virtual void OnItemDeselected()
     {
-        GameOverlordController.instance.ClearSelectedItem(this);
-
         this.GetComponent<SpriteRenderer>().color = Color.white;
     }
 
