@@ -13,6 +13,11 @@ public class Poop : ItemBase
 
     private float nextAnimation;
 
+    private void Start()
+    {
+        nextAnimation = Time.time;
+    }
+
     private void Update()
     {
         if (Time.time > nextAnimation)
