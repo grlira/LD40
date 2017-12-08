@@ -24,6 +24,7 @@ GameObject:
   - component: {fileID: 114183310324679664}
   - component: {fileID: 82147514262337858}
   - component: {fileID: 58721026662503156}
+  - component: {fileID: 114396305701080380}
   m_Layer: 0
   m_Name: Visitor
   m_TagString: Untagged
@@ -171,10 +172,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 5
-  sprites:
-  - {fileID: 21300000, guid: 6573b76e5e7218c478c7fa9af480c947, type: 3}
-  - {fileID: 21300002, guid: 6573b76e5e7218c478c7fa9af480c947, type: 3}
-  - {fileID: 21300004, guid: 6573b76e5e7218c478c7fa9af480c947, type: 3}
+--- !u!114 &114396305701080380
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1571348759814266}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cea69bec400167341a369684081f2444, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animatedSprite:
+  - {fileID: 11400000, guid: a95ba0b2a352fd74d91115f76741193e, type: 2}
+  - {fileID: 11400000, guid: 140be1e85591e4943a5b1c08e3055f76, type: 2}
+  - {fileID: 11400000, guid: ce5b1e7a879fbf34784c030895e80b88, type: 2}
+  isAnimated: 0
+  startingGroup: 0
 --- !u!212 &212003773309755906
 SpriteRenderer:
   m_ObjectHideFlags: 1

@@ -40,6 +40,7 @@ GameObject:
   - component: {fileID: 50251698090498338}
   - component: {fileID: 58482647680461148}
   - component: {fileID: 114084254713759842}
+  - component: {fileID: 114758295657722188}
   m_Layer: 11
   m_Name: Player
   m_TagString: Untagged
@@ -137,79 +138,28 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 4
-  playerSprites:
-  - sprites:
-    - {fileID: 21300096, guid: 344fbabc0aa9c904dbd268a2dde6ed73, type: 3}
-    - {fileID: 21300098, guid: 344fbabc0aa9c904dbd268a2dde6ed73, type: 3}
-    - {fileID: 21300100, guid: 344fbabc0aa9c904dbd268a2dde6ed73, type: 3}
-    - {fileID: 21300102, guid: 344fbabc0aa9c904dbd268a2dde6ed73, type: 3}
-    - {fileID: 21300104, guid: 344fbabc0aa9c904dbd268a2dde6ed73, type: 3}
-    - {fileID: 21300106, guid: 344fbabc0aa9c904dbd268a2dde6ed73, type: 3}
-    - {fileID: 21300108, guid: 344fbabc0aa9c904dbd268a2dde6ed73, type: 3}
-    - {fileID: 21300110, guid: 344fbabc0aa9c904dbd268a2dde6ed73, type: 3}
-  - sprites:
-    - {fileID: 21300080, guid: 344fbabc0aa9c904dbd268a2dde6ed73, type: 3}
-    - {fileID: 21300082, guid: 344fbabc0aa9c904dbd268a2dde6ed73, type: 3}
-    - {fileID: 21300084, guid: 344fbabc0aa9c904dbd268a2dde6ed73, type: 3}
-    - {fileID: 21300086, guid: 344fbabc0aa9c904dbd268a2dde6ed73, type: 3}
-    - {fileID: 21300088, guid: 344fbabc0aa9c904dbd268a2dde6ed73, type: 3}
-    - {fileID: 21300090, guid: 344fbabc0aa9c904dbd268a2dde6ed73, type: 3}
-    - {fileID: 21300092, guid: 344fbabc0aa9c904dbd268a2dde6ed73, type: 3}
-    - {fileID: 21300094, guid: 344fbabc0aa9c904dbd268a2dde6ed73, type: 3}
-  - sprites:
-    - {fileID: 21300064, guid: 344fbabc0aa9c904dbd268a2dde6ed73, type: 3}
-    - {fileID: 21300066, guid: 344fbabc0aa9c904dbd268a2dde6ed73, type: 3}
-    - {fileID: 21300068, guid: 344fbabc0aa9c904dbd268a2dde6ed73, type: 3}
-    - {fileID: 21300070, guid: 344fbabc0aa9c904dbd268a2dde6ed73, type: 3}
-    - {fileID: 21300072, guid: 344fbabc0aa9c904dbd268a2dde6ed73, type: 3}
-    - {fileID: 21300074, guid: 344fbabc0aa9c904dbd268a2dde6ed73, type: 3}
-    - {fileID: 21300076, guid: 344fbabc0aa9c904dbd268a2dde6ed73, type: 3}
-    - {fileID: 21300078, guid: 344fbabc0aa9c904dbd268a2dde6ed73, type: 3}
-  - sprites:
-    - {fileID: 21300048, guid: 344fbabc0aa9c904dbd268a2dde6ed73, type: 3}
-    - {fileID: 21300050, guid: 344fbabc0aa9c904dbd268a2dde6ed73, type: 3}
-    - {fileID: 21300052, guid: 344fbabc0aa9c904dbd268a2dde6ed73, type: 3}
-    - {fileID: 21300054, guid: 344fbabc0aa9c904dbd268a2dde6ed73, type: 3}
-    - {fileID: 21300056, guid: 344fbabc0aa9c904dbd268a2dde6ed73, type: 3}
-    - {fileID: 21300058, guid: 344fbabc0aa9c904dbd268a2dde6ed73, type: 3}
-    - {fileID: 21300060, guid: 344fbabc0aa9c904dbd268a2dde6ed73, type: 3}
-    - {fileID: 21300062, guid: 344fbabc0aa9c904dbd268a2dde6ed73, type: 3}
-  - sprites:
-    - {fileID: 21300032, guid: 344fbabc0aa9c904dbd268a2dde6ed73, type: 3}
-    - {fileID: 21300034, guid: 344fbabc0aa9c904dbd268a2dde6ed73, type: 3}
-    - {fileID: 21300036, guid: 344fbabc0aa9c904dbd268a2dde6ed73, type: 3}
-    - {fileID: 21300038, guid: 344fbabc0aa9c904dbd268a2dde6ed73, type: 3}
-    - {fileID: 21300040, guid: 344fbabc0aa9c904dbd268a2dde6ed73, type: 3}
-    - {fileID: 21300042, guid: 344fbabc0aa9c904dbd268a2dde6ed73, type: 3}
-    - {fileID: 21300044, guid: 344fbabc0aa9c904dbd268a2dde6ed73, type: 3}
-    - {fileID: 21300046, guid: 344fbabc0aa9c904dbd268a2dde6ed73, type: 3}
-  - sprites:
-    - {fileID: 21300016, guid: 344fbabc0aa9c904dbd268a2dde6ed73, type: 3}
-    - {fileID: 21300018, guid: 344fbabc0aa9c904dbd268a2dde6ed73, type: 3}
-    - {fileID: 21300020, guid: 344fbabc0aa9c904dbd268a2dde6ed73, type: 3}
-    - {fileID: 21300022, guid: 344fbabc0aa9c904dbd268a2dde6ed73, type: 3}
-    - {fileID: 21300024, guid: 344fbabc0aa9c904dbd268a2dde6ed73, type: 3}
-    - {fileID: 21300026, guid: 344fbabc0aa9c904dbd268a2dde6ed73, type: 3}
-    - {fileID: 21300028, guid: 344fbabc0aa9c904dbd268a2dde6ed73, type: 3}
-    - {fileID: 21300030, guid: 344fbabc0aa9c904dbd268a2dde6ed73, type: 3}
-  - sprites:
-    - {fileID: 21300000, guid: 344fbabc0aa9c904dbd268a2dde6ed73, type: 3}
-    - {fileID: 21300002, guid: 344fbabc0aa9c904dbd268a2dde6ed73, type: 3}
-    - {fileID: 21300004, guid: 344fbabc0aa9c904dbd268a2dde6ed73, type: 3}
-    - {fileID: 21300006, guid: 344fbabc0aa9c904dbd268a2dde6ed73, type: 3}
-    - {fileID: 21300008, guid: 344fbabc0aa9c904dbd268a2dde6ed73, type: 3}
-    - {fileID: 21300010, guid: 344fbabc0aa9c904dbd268a2dde6ed73, type: 3}
-    - {fileID: 21300012, guid: 344fbabc0aa9c904dbd268a2dde6ed73, type: 3}
-    - {fileID: 21300014, guid: 344fbabc0aa9c904dbd268a2dde6ed73, type: 3}
-  - sprites:
-    - {fileID: 21300112, guid: 344fbabc0aa9c904dbd268a2dde6ed73, type: 3}
-    - {fileID: 21300114, guid: 344fbabc0aa9c904dbd268a2dde6ed73, type: 3}
-    - {fileID: 21300116, guid: 344fbabc0aa9c904dbd268a2dde6ed73, type: 3}
-    - {fileID: 21300118, guid: 344fbabc0aa9c904dbd268a2dde6ed73, type: 3}
-    - {fileID: 21300120, guid: 344fbabc0aa9c904dbd268a2dde6ed73, type: 3}
-    - {fileID: 21300122, guid: 344fbabc0aa9c904dbd268a2dde6ed73, type: 3}
-    - {fileID: 21300124, guid: 344fbabc0aa9c904dbd268a2dde6ed73, type: 3}
-    - {fileID: 21300126, guid: 344fbabc0aa9c904dbd268a2dde6ed73, type: 3}
+--- !u!114 &114758295657722188
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1978029667700986}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cea69bec400167341a369684081f2444, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animatedSprite:
+  - {fileID: 11400000, guid: fc129c91cc6ae8f4080527fff058f8b1, type: 2}
+  - {fileID: 11400000, guid: 0c14e7201d8cf9248bd68151f3f5d5e6, type: 2}
+  - {fileID: 11400000, guid: 667676713e77c6943838b16e1bc6759e, type: 2}
+  - {fileID: 11400000, guid: 9e6bb94475062134f9cef390e62ec10a, type: 2}
+  - {fileID: 11400000, guid: 90c333a7f47a2a941b4fa552a4d5d628, type: 2}
+  - {fileID: 11400000, guid: 8b5a762b5ea65254bbe04d790f7f5d36, type: 2}
+  - {fileID: 11400000, guid: 74d89a86fe4235048a30c94b55db789b, type: 2}
+  - {fileID: 11400000, guid: 0a8379a4195fc3a49ac82cc134e32a54, type: 2}
+  isAnimated: 0
+  startingGroup: 0
 --- !u!212 &212010081255496658
 SpriteRenderer:
   m_ObjectHideFlags: 1

@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(AnimatedSprite))]
 public class PlayerController : MonoBehaviour
 {
     [Serializable]
@@ -16,8 +17,7 @@ public class PlayerController : MonoBehaviour
 
     private Rigidbody2D myRigidBody;
     private Transform myTransform;
-
-    public OldLadySpriteSide[] playerSprites;
+    private AnimatedSprite myAnimatedSprite;
 
     private int animationFrame = 0;
     private float nextAnimationFrame;
@@ -28,20 +28,16 @@ public class PlayerController : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        myTransform = this.transform;
-
         movementType = Helpers.GetOptionsMovementType();
     }
 
     void Awake()
     {
-
+        myAnimatedSprite = GetComponent<AnimatedSprite>();
+        myTransform = transform;
+        myRigidBody = GetComponent<Rigidbody2D>();
     }
-
-    private void SetSprite(int side)
-    {
-        this.GetComponent<SpriteRenderer>().sprite = playerSprites[side].sprites[animationFrame];
-    }
+    
 
     // Update is called once per frame
     void Update()
@@ -61,24 +57,24 @@ public class PlayerController : MonoBehaviour
             if (Input.GetKey(KeyCode.W))
             {
                 movementDirection += playerToMouseNotNull;
-                endAnimationFrame = Time.time + 0.2f;
+                endAnimationFrame = Time.time + 0.15f;
             }
             if (Input.GetKey(KeyCode.S))
             {
                 movementDirection += -playerToMouseNotNull;
-                endAnimationFrame = Time.time + 0.2f;
+                endAnimationFrame = Time.time + 0.15f;
             }
 
             if (Input.GetKey(KeyCode.A))
             {
                 movementDirection = Vector3.Cross(Vector3.forward.normalized, playerToMouseNotNull.normalized);
-                endAnimationFrame = Time.time + 0.2f;
+                endAnimationFrame = Time.time + 0.15f;
             }
 
             if (Input.GetKey(KeyCode.D))
             {
                 movementDirection = -Vector3.Cross(Vector3.forward.normalized, playerToMouseNotNull.normalized);
-                endAnimationFrame = Time.time + 0.2f;
+                endAnimationFrame = Time.time + 0.15f;
             }
         }
         else
@@ -86,24 +82,24 @@ public class PlayerController : MonoBehaviour
             if (Input.GetKey(KeyCode.W))
             {
                 movementDirection += Vector2.up;
-                endAnimationFrame = Time.time + 0.2f;
+                endAnimationFrame = Time.time + 0.15f;
             }
             if (Input.GetKey(KeyCode.S))
             {
                 movementDirection += Vector2.down;
-                endAnimationFrame = Time.time + 0.2f;
+                endAnimationFrame = Time.time + 0.15f;
             }
 
             if (Input.GetKey(KeyCode.A))
             {
                 movementDirection += Vector2.left;
-                endAnimationFrame = Time.time + 0.2f;
+                endAnimationFrame = Time.time + 0.15f;
             }
 
             if (Input.GetKey(KeyCode.D))
             {
                 movementDirection += Vector2.right;
-                endAnimationFrame = Time.time + 0.2f;
+                endAnimationFrame = Time.time + 0.15f;
             }
 
             
@@ -131,18 +127,10 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        var isAnimating = false;
         if (Time.time < this.endAnimationFrame)
-            isAnimating = true;
-
-        if (isAnimating && Time.time > this.nextAnimationFrame)
-        {
-            this.animationFrame++;
-            this.nextAnimationFrame = Time.time + 0.25f;
-
-            if(this.animationFrame >= 8)
-                this.animationFrame = 0;
-        }
+            myAnimatedSprite.isAnimated = true;
+        else
+            myAnimatedSprite.isAnimated = false;
     }
 
 
@@ -166,6 +154,6 @@ public class PlayerController : MonoBehaviour
     void setPlayerSprite(float angle)
     {
         int index = Mathf.FloorToInt((angle + 22.5f + 180f)/45f) % 8;
-        SetSprite(index);
+        myAnimatedSprite.Group = index;
     }
 }

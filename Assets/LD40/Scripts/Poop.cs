@@ -5,35 +5,16 @@ using UnityEngine;
 public class Poop : ItemBase
 {
 
-    public Sprite sprite1, sprite2;
-
     public GameObject cleaningPrefab;
-
     public GameObject outline;
-
-    private float nextAnimation;
 
     private void Start()
     {
-        nextAnimation = Time.time;
     }
 
     private void Update()
     {
-        if (Time.time > nextAnimation)
-        {
-            nextAnimation += 1;
-
-            var renderer = this.GetComponent<SpriteRenderer>();
-            if (renderer.sprite == sprite1)
-            {
-                renderer.sprite = sprite2;
-            }
-            else
-            {
-                renderer.sprite = sprite1;
-            }
-        }
+        
     }
 
     public override void OnItemSelected()

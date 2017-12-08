@@ -14,8 +14,6 @@ public class VisitorController : MonoBehaviour
     private Rigidbody2D myRigidBody;
     private float destructionTime = 0;
 
-    public Sprite[] sprites;
-
     private bool dieing = false;
 
     // Use this for initialization
@@ -24,14 +22,9 @@ public class VisitorController : MonoBehaviour
         myRigidBody = this.GetComponent<Rigidbody2D>();
         myRigidBody.drag = 10;
 
-        GetComponent<SpriteRenderer>().sprite = sprites[Random.Range(0, sprites.Length)];
+        GetComponent<AnimatedSprite>().RandomizeGroup();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     void OnCollisionEnter2D(Collision2D collision)
     {

@@ -24,6 +24,7 @@ GameObject:
   - component: {fileID: 114509534320210136}
   - component: {fileID: 82128627424685248}
   - component: {fileID: 58629866497911646}
+  - component: {fileID: 114730206379458812}
   m_Layer: 8
   m_Name: Cat
   m_TagString: Untagged
@@ -202,28 +203,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 5
   poopPrefab: {fileID: 1066756117853336, guid: 21eb4da19ba8cd04093dad7c59f4ce5c, type: 2}
-  cats:
-  - frames:
-    - {fileID: 21300000, guid: 9851b0b58492cfa4a835652f106b9f75, type: 3}
-    - {fileID: 21300002, guid: 9851b0b58492cfa4a835652f106b9f75, type: 3}
-    - {fileID: 21300004, guid: 9851b0b58492cfa4a835652f106b9f75, type: 3}
-    - {fileID: 21300006, guid: 9851b0b58492cfa4a835652f106b9f75, type: 3}
-    - {fileID: 21300008, guid: 9851b0b58492cfa4a835652f106b9f75, type: 3}
-    - {fileID: 21300010, guid: 9851b0b58492cfa4a835652f106b9f75, type: 3}
-  - frames:
-    - {fileID: 21300012, guid: 9851b0b58492cfa4a835652f106b9f75, type: 3}
-    - {fileID: 21300014, guid: 9851b0b58492cfa4a835652f106b9f75, type: 3}
-    - {fileID: 21300016, guid: 9851b0b58492cfa4a835652f106b9f75, type: 3}
-    - {fileID: 21300018, guid: 9851b0b58492cfa4a835652f106b9f75, type: 3}
-    - {fileID: 21300020, guid: 9851b0b58492cfa4a835652f106b9f75, type: 3}
-    - {fileID: 21300022, guid: 9851b0b58492cfa4a835652f106b9f75, type: 3}
-  - frames:
-    - {fileID: 21300024, guid: 9851b0b58492cfa4a835652f106b9f75, type: 3}
-    - {fileID: 21300026, guid: 9851b0b58492cfa4a835652f106b9f75, type: 3}
-    - {fileID: 21300028, guid: 9851b0b58492cfa4a835652f106b9f75, type: 3}
-    - {fileID: 21300030, guid: 9851b0b58492cfa4a835652f106b9f75, type: 3}
-    - {fileID: 21300032, guid: 9851b0b58492cfa4a835652f106b9f75, type: 3}
-    - {fileID: 21300034, guid: 9851b0b58492cfa4a835652f106b9f75, type: 3}
+--- !u!114 &114730206379458812
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1068859802553488}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cea69bec400167341a369684081f2444, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animatedSprite:
+  - {fileID: 11400000, guid: 341cb7d192d530e4d955b791a7159b47, type: 2}
+  - {fileID: 11400000, guid: 9ca3e378ad480f340a0ccb48688eaa45, type: 2}
+  - {fileID: 11400000, guid: 705e27ae60d50e146bb247643938ce44, type: 2}
+  isAnimated: 1
+  startingGroup: 0
 --- !u!212 &212589521959145036
 SpriteRenderer:
   m_ObjectHideFlags: 1

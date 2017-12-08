@@ -20,8 +20,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4567156593615978}
   - component: {fileID: 212257244482113156}
-  - component: {fileID: 114413330641366340}
   - component: {fileID: 82616494681636008}
+  - component: {fileID: 114510620131060160}
   m_Layer: 0
   m_Name: Cleaning
   m_TagString: Untagged
@@ -122,7 +122,7 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
---- !u!114 &114413330641366340
+--- !u!114 &114510620131060160
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -130,14 +130,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1676090266172092}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5c333ec501eee064bb1fcec7077cb8df, type: 3}
+  m_Script: {fileID: 11500000, guid: cea69bec400167341a369684081f2444, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sprites:
-  - {fileID: 21300000, guid: cb30b24ca41ca914fb76c312d5e657b9, type: 3}
-  - {fileID: 21300002, guid: cb30b24ca41ca914fb76c312d5e657b9, type: 3}
-  - {fileID: 21300004, guid: cb30b24ca41ca914fb76c312d5e657b9, type: 3}
-  - {fileID: 21300006, guid: cb30b24ca41ca914fb76c312d5e657b9, type: 3}
+  animatedSprite:
+  - {fileID: 11400000, guid: 3df8289b46877494985cd504e8eca396, type: 2}
+  isAnimated: 1
+  startingGroup: 0
 --- !u!212 &212257244482113156
 SpriteRenderer:
   m_ObjectHideFlags: 1
